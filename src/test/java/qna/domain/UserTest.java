@@ -11,8 +11,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 
 public class UserTest {
-    public static final User JAVAJIGI = new User(1L, "javajigi", "password", "name", "javajigi@slipp.net");
-    public static final User SANJIGI = new User(2L, "sanjigi", "password", "name", "sanjigi@slipp.net");
+    public static final User user1 = new User(1L, "javajigi", "password", "name", "javajigi@slipp.net");
+    public static final User user2 = new User(2L, "sanjigi", "password", "name", "sanjigi@slipp.net");
 
     @ParameterizedTest
     @MethodSource("provideUserForEqualTest")
@@ -23,8 +23,8 @@ public class UserTest {
 
     private static Stream<Arguments> provideUserForEqualTest() {
         return Stream.of(
-                Arguments.of(JAVAJIGI, JAVAJIGI),
-                Arguments.of(SANJIGI, SANJIGI)
+                Arguments.of(user1, user1),
+                Arguments.of(user2, user2)
         );
     }
 
@@ -37,8 +37,8 @@ public class UserTest {
 
     private static Stream<Arguments> provideUserForNotEqualTest() {
         return Stream.of(
-                Arguments.of(JAVAJIGI, SANJIGI),
-                Arguments.of(SANJIGI, JAVAJIGI)
+                Arguments.of(user1, user2),
+                Arguments.of(user2, user1)
         );
     }
 }

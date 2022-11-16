@@ -72,11 +72,12 @@ public class Answer extends AbstractEntity {
 
     public void deleteValidate(User loginUser) throws CannotDeleteException {
         if (!isOwner(loginUser)) {
-            throw new CannotDeleteException("다른 사람이 쓴 답변이 있어 삭제할 수 없습니다.");
+            throw new CannotDeleteException(
+                    String.format("%s가 쓴 답변이 있어 %s가 삭제할 수 없습니다.", getWriter().getUserId(), loginUser.getUserId()));
         }
     }
 
-    public DeleteHistory delete() throws CannotDeleteException {
+    public DeleteHistory delete() {
         setDeleted(true);
         return new DeleteHistory(ContentType.ANSWER, getId(), getWriter(), LocalDateTime.now());
     }
